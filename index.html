@@ -139,9 +139,9 @@ header::after{
 .h-right{justify-self:start;position:relative}   /* RTL: سمت راست */
 .h-left{justify-self:end}                         /* RTL: سمت چپ */
 .clock{direction:rtl;display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.45}
-.clock .date{font-size:10.5px;color:var(--muted);white-space:nowrap}
+.clock .date{font-size:10.5px;font-weight:800;color:var(--muted);white-space:nowrap}
 .clock .time{
-  font-size:16px;font-weight:700;color:var(--gold-2);font-variant-numeric:tabular-nums;
+  font-size:16px;font-weight:800;color:var(--gold-2);font-variant-numeric:tabular-nums;
   text-shadow:0 0 16px rgba(245,208,103,.35);
 }
 .account-btn{
@@ -359,6 +359,27 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
   font-size:13.5px;opacity:0;transition:.4s;max-width:90vw;text-align:center
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
+/* درگاه نمایشی */
+#paymentScreen{padding:24px 14px;display:flex;align-items:center;justify-content:center;background:radial-gradient(600px 300px at 50% 0%,rgba(36,130,95,.14),transparent 70%),#f3f6f8;color:#24313d;font-family:'Vazirmatn',Tahoma,sans-serif}
+#paymentScreen.hidden{display:none!important}
+.pay-shell{width:100%;max-width:430px}
+.pay-top{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:800;margin-bottom:18px;color:#24313d}
+.pay-mark{width:38px;height:38px;border-radius:12px;background:#2b9b72;color:#fff;display:grid;place-items:center;font-size:24px;font-weight:800}
+.pay-warning{background:#fff4d8;border:1px solid #f0d79a;color:#815c11;border-radius:12px;padding:11px 12px;text-align:center;font-size:11.5px;line-height:1.8;margin-bottom:12px}
+.pay-card{background:#fff;border:1px solid #e2e8ec;border-radius:18px;padding:22px;box-shadow:0 18px 50px rgba(23,43,61,.1)}
+.pay-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:6px}
+.pay-merchant{text-align:center;color:#788794;font-size:12px;margin-bottom:22px}
+.pay-amount-label{text-align:center;font-size:12px;color:#778692}
+.pay-amount{text-align:center;font-size:25px;font-weight:800;color:#23865f;margin:5px 0 22px}
+.pay-field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;flex:1;min-width:0}
+.pay-field label{font-size:12px;font-weight:700;color:#52616e}
+.pay-field input{width:100%;height:46px;border:1px solid #d7e0e6;border-radius:10px;padding:0 12px;background:#fbfcfd;color:#24313d;font-size:15px;outline:none}
+.pay-field input:focus{border-color:#2b9b72;box-shadow:0 0 0 3px rgba(43,155,114,.12)}
+.pay-row{display:flex;gap:12px}
+#demoPayBtn{margin-top:4px;background:linear-gradient(135deg,#35b985,#21875f);color:#fff;box-shadow:none}
+.pay-cancel{width:100%;height:42px;background:transparent;color:#687986;font-size:13px;margin-top:7px}
+.pay-message{text-align:center;color:#83909a;font-size:11px;line-height:1.8;margin-top:12px}
+.pay-footer{text-align:center;color:#8a98a2;font-size:11px;margin-top:15px}
 
 @media (min-width:640px){
   header{padding:14px 28px}
@@ -467,6 +488,29 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
 
 <div class="toast" id="toast"></div>
 
+<!-- درگاه نمایشی؛ پرداخت واقعی انجام نمی‌شود -->
+<section id="paymentScreen" class="screen hidden" aria-label="درگاه پرداخت آزمایشی">
+  <div class="pay-shell">
+    <div class="pay-top"><span class="pay-mark">Z</span><span>درگاه پرداخت آزمایشی</span></div>
+    <div class="pay-warning">محیط نمایشی — اطلاعات کارت بانکی واقعی وارد نکنید</div>
+    <div class="pay-card">
+      <div class="pay-title">پرداخت اینترنتی</div>
+      <div class="pay-merchant">پذیرنده: فروشگاه سکه (دمو)</div>
+      <div class="pay-amount-label">مبلغ قابل پرداخت</div>
+      <div class="pay-amount" id="payAmount">—</div>
+      <div class="pay-field"><label for="demoCard">شماره کارت آزمایشی</label><input id="demoCard" inputmode="numeric" placeholder="•••• •••• •••• ••••" maxlength="19" autocomplete="off"></div>
+      <div class="pay-row">
+        <div class="pay-field"><label for="demoExpiry">تاریخ انقضا</label><input id="demoExpiry" placeholder="MM/YY" maxlength="5" autocomplete="off"></div>
+        <div class="pay-field"><label for="demoCvv">CVV2</label><input id="demoCvv" inputmode="numeric" placeholder="•••" maxlength="4" autocomplete="off"></div>
+      </div>
+      <button type="button" id="demoPayBtn" class="btn-gold">پرداخت آزمایشی</button>
+      <button type="button" id="cancelPayBtn" class="pay-cancel">بازگشت به فروشگاه</button>
+      <div id="demoPayMessage" class="pay-message">این صفحه شبیه‌سازی است و به شبکه بانکی متصل نیست.</div>
+    </div>
+    <div class="pay-footer">پرداخت امنِ نمایشی · بدون تراکنش واقعی</div>
+  </div>
+</section>
+
 <script>
 /* ---------- تنظیمات ---------- */
 // کاربران مجاز (نسخه نمایشی – برای امنیت واقعی باید احراز هویت سمت سرور باشد)
@@ -477,11 +521,11 @@ const USERS = {
 const MAX_QTY = 10;
 
 const PRODUCTS = [
-  {id:1, name:"سکه بهار آزادی (تمام)", desc:"طرح امامی · عیار ۹۰۰",   price:46500000, big:"تمام",  small:"بهار آزادی", cls:"",      tag:"پرفروش"},
-  {id:2, name:"نیم سکه",                 desc:"نیم‌سکه بهار آزادی",     price:25200000, big:"نیم",   small:"سکه",       cls:"small", tag:""},
-  {id:3, name:"ربع سکه",                 desc:"ربع‌سکه بهار آزادی",     price:14100000, big:"ربع",   small:"سکه",       cls:"tiny",  tag:"اقتصادی"},
-  {id:4, name:"سکه گرمی",                desc:"یک گرم · طلای ۲۴ عیار",  price:6200000,  big:"۱",     small:"گرم",       cls:"gram",  tag:""},
-  {id:5, name:"سکه تمام امامی",          desc:"ضرب ۱۳۸۶ تا ۱۴۰۴",       price:48200000, big:"امامی", small:"تمام سکه",  cls:"",      tag:"ویژه"},
+  {id:1, name:"سکه بهار آزادی (تمام)", desc:"طرح امامی · عیار ۹۰۰",   price:259160000, big:"تمام",  small:"بهار آزادی", cls:"",      tag:"پرفروش"},
+  {id:2, name:"نیم سکه",                 desc:"نیم‌سکه بهار آزادی",     price:142970000, big:"نیم",   small:"سکه",       cls:"small", tag:""},
+  {id:3, name:"ربع سکه",                 desc:"ربع‌سکه بهار آزادی",     price:76980000, big:"ربع",   small:"سکه",       cls:"tiny",  tag:"اقتصادی"},
+  {id:4, name:"سکه گرمی",                desc:"یک گرم · طلای ۲۴ عیار",  price:37000000,  big:"۱",     small:"گرم",       cls:"gram",  tag:""},
+  {id:5, name:"سکه تمام امامی",          desc:"ضرب ۱۳۸۶ تا ۱۴۰۴",       price:268790000, big:"امامی", small:"تمام سکه",  cls:"",      tag:"ویژه"},
   {id:6, name:"سکه پهلوی",               desc:"سکه کلکسیونی · نمونه",    price:52800000, big:"پهلوی", small:"تمام سکه",  cls:"",      tag:"کلکسیونی"}
 ];
 
@@ -569,10 +613,7 @@ $('#logoutBtn').addEventListener('click',()=>{
 let clockTimer;
 function tick(){
   const now=new Date();
-  const narrow=window.innerWidth<480;
-  const opts = narrow
-    ? {year:'numeric',month:'long',day:'numeric'}
-    : {weekday:'long',year:'numeric',month:'long',day:'numeric'};
+  const opts = {weekday:'long',year:'numeric',month:'long',day:'numeric'};
   $('#clockDate').textContent=new Intl.DateTimeFormat('fa-IR-u-ca-persian',opts).format(now);
   $('#clockTime').textContent=new Intl.DateTimeFormat('fa-IR',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
 }
@@ -594,6 +635,7 @@ function coinHTML(p,extra=''){
 }
 
 /* ---------- نمایش محصولات ---------- */
+/* قیمت‌های ثابت بازار در تاریخ ۱۷ مهر ۱۴۰۵؛ دریافت زنده غیرفعال است. */
 function renderProducts(){
   const grid=$('#grid'); grid.innerHTML='';
   PRODUCTS.forEach((p,i)=>{
@@ -654,16 +696,25 @@ overlay.addEventListener('click',e=>{ if(e.target===overlay) closeModal(); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
 $('#orderBtn').addEventListener('click',()=>{
-  const btn=$('#orderBtn'); btn.disabled=true; btn.textContent='در حال ثبت...';
-  setTimeout(()=>{
-    btn.disabled=false; btn.textContent='ثبت سفارش';
-    const code='GC-'+Math.floor(100000+Math.random()*900000);
-    $('#sMsg').textContent=`${fa(qty)} عدد «${current.name}» به مبلغ ${fa(current.price*qty)} تومان ثبت شد.`;
-    $('#sCode').textContent='کد پیگیری: '+code.replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
-    modal.classList.add('done');
-  },900);
+  if(!current) return;
+  const amount = current.price * qty;
+  $('#payAmount').textContent = fa(amount) + ' تومان';
+  $('#demoPayMessage').textContent = 'این صفحه شبیه‌سازی است و به شبکه بانکی متصل نیست.';
+  $('#demoCard').value=''; $('#demoExpiry').value=''; $('#demoCvv').value='';
+  closeModal();
+  shopScreen.classList.add('hidden');
+  $('#paymentScreen').classList.remove('hidden');
+  window.scrollTo(0,0);
 });
 $('#doneBtn').addEventListener('click',closeModal);
+$('#cancelPayBtn').addEventListener('click',()=>{
+  $('#paymentScreen').classList.add('hidden');
+  shopScreen.classList.remove('hidden');
+  window.scrollTo(0,0);
+});
+$('#demoPayBtn').addEventListener('click',()=>{
+  $('#demoPayMessage').textContent='پرداخت انجام نشد؛ این فقط یک درگاه نمایشی است و هیچ تراکنش بانکی انجام نمی‌شود.';
+});
 
 /* ---------- ادامه نشست ---------- */
 try{
