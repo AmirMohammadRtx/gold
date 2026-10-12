@@ -139,9 +139,9 @@ header::after{
 .h-right{justify-self:start;position:relative}   /* RTL: سمت راست */
 .h-left{justify-self:end}                         /* RTL: سمت چپ */
 .clock{direction:rtl;display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.45}
-.clock .date{font-size:10.5px;font-weight:800;color:var(--muted);white-space:nowrap}
+.clock .date{font-size:10.5px;color:var(--muted);white-space:nowrap}
 .clock .time{
-  font-size:16px;font-weight:800;color:var(--gold-2);font-variant-numeric:tabular-nums;
+  font-size:16px;font-weight:700;color:var(--gold-2);font-variant-numeric:tabular-nums;
   text-shadow:0 0 16px rgba(245,208,103,.35);
 }
 .account-btn{
@@ -359,27 +359,6 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
   font-size:13.5px;opacity:0;transition:.4s;max-width:90vw;text-align:center
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
-/* درگاه نمایشی */
-#paymentScreen{padding:24px 14px;display:flex;align-items:center;justify-content:center;background:radial-gradient(600px 300px at 50% 0%,rgba(36,130,95,.14),transparent 70%),#f3f6f8;color:#24313d;font-family:'Vazirmatn',Tahoma,sans-serif}
-#paymentScreen.hidden{display:none!important}
-.pay-shell{width:100%;max-width:430px}
-.pay-top{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:800;margin-bottom:18px;color:#24313d}
-.pay-mark{width:38px;height:38px;border-radius:12px;background:#2b9b72;color:#fff;display:grid;place-items:center;font-size:24px;font-weight:800}
-.pay-warning{background:#fff4d8;border:1px solid #f0d79a;color:#815c11;border-radius:12px;padding:11px 12px;text-align:center;font-size:11.5px;line-height:1.8;margin-bottom:12px}
-.pay-card{background:#fff;border:1px solid #e2e8ec;border-radius:18px;padding:22px;box-shadow:0 18px 50px rgba(23,43,61,.1)}
-.pay-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:6px}
-.pay-merchant{text-align:center;color:#788794;font-size:12px;margin-bottom:22px}
-.pay-amount-label{text-align:center;font-size:12px;color:#778692}
-.pay-amount{text-align:center;font-size:25px;font-weight:800;color:#23865f;margin:5px 0 22px}
-.pay-field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;flex:1;min-width:0}
-.pay-field label{font-size:12px;font-weight:700;color:#52616e}
-.pay-field input{width:100%;height:46px;border:1px solid #d7e0e6;border-radius:10px;padding:0 12px;background:#fbfcfd;color:#24313d;font-size:15px;outline:none}
-.pay-field input:focus{border-color:#2b9b72;box-shadow:0 0 0 3px rgba(43,155,114,.12)}
-.pay-row{display:flex;gap:12px}
-#demoPayBtn{margin-top:4px;background:linear-gradient(135deg,#35b985,#21875f);color:#fff;box-shadow:none}
-.pay-cancel{width:100%;height:42px;background:transparent;color:#687986;font-size:13px;margin-top:7px}
-.pay-message{text-align:center;color:#83909a;font-size:11px;line-height:1.8;margin-top:12px}
-.pay-footer{text-align:center;color:#8a98a2;font-size:11px;margin-top:15px}
 
 @media (min-width:640px){
   header{padding:14px 28px}
@@ -390,6 +369,130 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ===== ساعت و تاریخ بولد ===== */
+.clock .date{font-weight:800;color:var(--gold-1)}
+.clock .time{font-weight:800}
+
+/* ===== آیتم گزارش در منوی حساب ===== */
+.dropdown button.report-item:active{background:rgba(245,208,103,.14);color:var(--gold-1)}
+@media (hover:hover){
+  .dropdown button.report-item:hover{background:rgba(245,208,103,.12);color:var(--gold-1)}
+  .dropdown button#logoutBtn:hover{background:rgba(255,100,80,.12);color:#ff9d8f}
+}
+.btn-ghost{
+  width:100%;height:46px;margin-top:10px;border-radius:14px;font-size:14px;font-weight:700;color:var(--gold-2);
+  background:rgba(245,208,103,.08);box-shadow:0 0 0 1px var(--line) inset;transition:.25s;
+}
+.btn-ghost:active{background:rgba(245,208,103,.18)}
+
+/* ===== صفحه گزارش خرید ===== */
+.rp-head{
+  position:sticky;top:0;z-index:20;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:8px;
+  padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));
+  background:linear-gradient(180deg,rgba(11,9,6,.96),rgba(11,9,6,.82));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.rp-head::after{content:"";position:absolute;bottom:0;right:0;left:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-2),transparent);opacity:.6}
+.rp-head h2{
+  text-align:center;font-size:20px;font-weight:800;
+  background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.rp-back{
+  width:42px;height:42px;border-radius:50%;background:rgba(245,208,103,.09);
+  box-shadow:0 0 0 1px var(--line) inset;display:grid;place-items:center;transition:.25s;
+}
+.rp-back:active{background:rgba(245,208,103,.2)}
+.rp-back svg{width:22px;height:22px;stroke:var(--gold-2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rp-body{max-width:1040px;margin:0 auto;padding:16px 14px calc(40px + env(safe-area-inset-bottom));animation:rise .6s both}
+.rp-note{font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:14px;line-height:1.9}
+.rp-card{
+  background:linear-gradient(165deg,#221b0f,#120e08);border-radius:18px;padding:14px;
+  box-shadow:0 10px 26px rgba(0,0,0,.4);margin-bottom:12px;
+}
+.rp-chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:2px;scrollbar-width:none}
+.rp-chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:none;height:36px;padding:0 15px;border-radius:18px;background:rgba(245,208,103,.08);color:var(--muted);
+  font-size:13px;box-shadow:0 0 0 1px var(--line) inset;transition:.2s;
+}
+.chip.on{background:var(--gold-grad);color:#2a1c02;font-weight:700;box-shadow:none}
+.rp-filters{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:700px){.rp-filters{grid-template-columns:1.2fr 1.2fr .8fr}}
+.rp-group label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+.rp-trio{display:grid;grid-template-columns:1.15fr 1.6fr 1fr;gap:6px}
+.rp-card select{
+  width:100%;height:44px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);
+  color:var(--text);font-family:inherit;font-size:16px;padding:0 6px;outline:none;transition:.2s;
+}
+.rp-card select:focus{border-color:var(--gold-2);box-shadow:0 0 0 3px rgba(245,208,103,.1)}
+.rp-card select option{background:#1a150d;color:var(--text)}
+.rp-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+.rp-msg{color:#ff9d8f;font-size:12.5px;min-height:18px}
+.rp-clear{height:38px;padding:0 14px;border-radius:12px;background:rgba(245,208,103,.1);color:var(--gold-2);font-size:13px;font-weight:700;flex:none}
+.rp-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.rp-sum>div{background:linear-gradient(165deg,#221b0f,#120e08);border-radius:16px;padding:12px 14px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.rp-sum span{display:block;font-size:11.5px;color:var(--muted);margin-bottom:4px}
+.rp-sum b{font-size:17px;font-weight:800;color:var(--gold-2)}
+.rp-sum b small{font-size:11px;color:var(--muted);font-weight:400;margin-right:4px}
+
+.rp-tbl{padding:4px 8px}
+.rp-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.rp-table th{
+  text-align:right;font-weight:700;color:var(--gold-2);font-size:12px;padding:12px 10px;
+  border-bottom:1px solid var(--line);white-space:nowrap;
+}
+.rp-table td{padding:13px 10px;border-bottom:1px solid rgba(245,208,103,.08);vertical-align:middle}
+.rp-table tbody tr:last-child td{border-bottom:0}
+.rp-table small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.rp-table .mono{font-variant-numeric:tabular-nums;letter-spacing:.5px;font-weight:700;color:var(--gold-1)}
+.type-pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(245,208,103,.12);color:var(--gold-2)}
+.st{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st.ok{background:rgba(90,200,120,.14);color:#8be3a3}
+.st.wait{background:rgba(245,208,103,.14);color:var(--gold-2)}
+.st.bad{background:rgba(255,120,100,.14);color:#ff9d8f}
+.rp-empty{text-align:center;padding:36px 10px;color:var(--muted);font-size:14px;line-height:2}
+
+/* موبایل: هر ردیف تبدیل به یک کارت می‌شود */
+@media (max-width:699px){
+  .rp-tbl{background:none;box-shadow:none;padding:0}
+  .rp-table thead{display:none}
+  .rp-table,.rp-table tbody,.rp-table tr,.rp-table td{display:block;width:100%}
+  .rp-table tr{
+    background:linear-gradient(165deg,#221b0f,#120e08);border-radius:18px;padding:6px 0;margin-bottom:10px;
+    box-shadow:0 8px 22px rgba(0,0,0,.38);
+  }
+  .rp-table td{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 16px;border:0}
+  .rp-table td::before{content:attr(data-label);color:var(--muted);font-size:12px;flex:none}
+  .rp-table td .v{text-align:left}
+  .rp-table small{display:inline-block;margin:0 8px 0 0}
+}
+
+/* ===== چیدمان موبایل: ردیف ۱ سه محصول کوچک، ردیف ۲ یک محصول کشیده، ردیف ۳ دو محصول (تکرار هر ۶ محصول) ===== */
+@media (max-width:759px){
+  .grid{grid-template-columns:repeat(6,1fr);gap:10px}
+  .card{grid-column:span 3}
+
+  /* سه محصول کوچک */
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)){grid-column:span 2;--k:.8;padding:10px 6px 10px;border-radius:16px}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) .tag{top:6px;left:6px;font-size:8.5px;padding:1px 6px}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) .coin-wrap{margin:8px 0 2px}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) h3{font-size:12px;line-height:1.45;min-height:35px;margin-bottom:2px;display:flex;align-items:center;justify-content:center}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) .desc{display:none}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) .price{font-size:12.5px;margin:4px 0 8px}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) .price small{display:block;margin:0;font-size:9.5px}
+  .card:is(:nth-child(6n+1),:nth-child(6n+2),:nth-child(6n+3)) .pick{height:32px;font-size:12px;border-radius:10px}
+
+  /* یک محصول کشیده */
+  .card:nth-child(6n+4){
+    grid-column:1 / -1;--k:1.25;
+    display:grid;grid-template-columns:44% 1fr;column-gap:6px;align-items:center;padding:14px 12px;
+  }
+  .card:nth-child(6n+4) .coin-wrap{grid-column:1;grid-row:1 / span 4;margin:0;--sw:80px}
+  .card:nth-child(6n+4) > :not(.coin-wrap):not(.tag){grid-column:2}
+  .card:nth-child(6n+4) .desc{min-height:0;margin-bottom:8px}
 }
 </style>
 </head>
@@ -415,7 +518,7 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
     </div>
     <div class="error-msg" id="errorMsg"></div>
     <button class="btn-gold" type="submit" id="loginBtn">ورود</button>
-    <div class="hint">نسخه نمایشی: نام کاربری <b>safari</b> و رمز <b>1234</b></div>
+    <div class="hint">نسخه نمایشی: نام کاربری <b>admin</b> و رمز <b>1234</b></div>
   </form>
 </section>
 
@@ -428,6 +531,10 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
       </button>
       <div class="dropdown" id="dropdown">
         <div class="who">وارد شده با نام<b id="whoName">—</b></div>
+        <button id="reportBtn" class="report-item">
+          <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+          گزارش خرید
+        </button>
         <button id="logoutBtn">
           <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
           خروج از حساب کاربری
@@ -447,11 +554,84 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
 
   <main>
     <div class="section-head">
-      <h2>سکه‌های موجود</h2>
+      <h2>سکه‌های آبشده</h2>
       <div class="line"></div>
     </div>
     <div class="grid" id="grid"></div>
   </main>
+</section>
+
+<!-- ======================= گزارش خرید ======================= -->
+<section id="reportScreen" class="screen hidden" aria-label="گزارش خرید">
+  <div class="rp-head">
+    <button class="rp-back" id="rpBack" aria-label="بازگشت">
+      <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <h2>گزارش خرید</h2>
+    <span></span>
+  </div>
+  <div class="rp-body">
+    <div class="rp-note">نسخه نمایشی: سفارش‌های نمونه و سفارش‌هایی که ثبت می‌کنید فقط در همین مرورگر ذخیره می‌شوند.</div>
+
+    <div class="rp-card">
+      <div class="rp-chips" id="rpChips">
+        <button class="chip on" data-r="all">همه</button>
+        <button class="chip" data-r="today">امروز</button>
+        <button class="chip" data-r="7">۷ روز اخیر</button>
+        <button class="chip" data-r="30">۳۰ روز اخیر</button>
+        <button class="chip" data-r="month">این ماه</button>
+      </div>
+      <div class="rp-filters">
+        <div class="rp-group">
+          <label>از تاریخ</label>
+          <div class="rp-trio">
+            <select id="fy" aria-label="سال شروع"></select>
+            <select id="fm" aria-label="ماه شروع"></select>
+            <select id="fd" aria-label="روز شروع"></select>
+          </div>
+        </div>
+        <div class="rp-group">
+          <label>تا تاریخ</label>
+          <div class="rp-trio">
+            <select id="ty" aria-label="سال پایان"></select>
+            <select id="tm" aria-label="ماه پایان"></select>
+            <select id="td" aria-label="روز پایان"></select>
+          </div>
+        </div>
+        <div class="rp-group">
+          <label>وضعیت</label>
+          <select id="rpStatus" aria-label="وضعیت">
+            <option value="">همه وضعیت‌ها</option>
+            <option value="done">تکمیل شد</option>
+            <option value="processing">در حال پردازش</option>
+            <option value="bad">لغو شده / ناموفق</option>
+          </select>
+        </div>
+      </div>
+      <div class="rp-actions">
+        <div class="rp-msg" id="rpMsg"></div>
+        <button class="rp-clear" id="rpClear">حذف فیلترها</button>
+      </div>
+    </div>
+
+    <div class="rp-sum">
+      <div><span>تعداد سفارش‌ها</span><b id="sumCount">۰</b></div>
+      <div><span>جمع خریدهای تکمیل‌شده</span><b id="sumAmount">۰<small>تومان</small></b></div>
+    </div>
+
+    <div class="rp-card rp-tbl">
+      <table class="rp-table">
+        <thead>
+          <tr>
+            <th>نوع</th><th>شماره سفارش (سند حسابداری)</th><th>محصول</th><th>قیمت</th>
+            <th>ثبت‌کننده</th><th>تاریخ</th><th>وضعیت</th>
+          </tr>
+        </thead>
+        <tbody id="rpBody"></tbody>
+      </table>
+      <div class="rp-empty hidden" id="rpEmpty">در این بازه سفارشی پیدا نشد.</div>
+    </div>
+  </div>
 </section>
 
 <!-- ======================= پاپ‌آپ سفارش ======================= -->
@@ -482,50 +662,28 @@ main{max-width:980px;margin:0 auto;padding:22px 14px calc(50px + env(safe-area-i
       <p id="sMsg"></p>
       <div class="code" id="sCode"></div>
       <button class="btn-gold" id="doneBtn">بسیار خب</button>
+      <button class="btn-ghost" id="toReportBtn">مشاهده در گزارش خرید</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- درگاه نمایشی؛ پرداخت واقعی انجام نمی‌شود -->
-<section id="paymentScreen" class="screen hidden" aria-label="درگاه پرداخت آزمایشی">
-  <div class="pay-shell">
-    <div class="pay-top"><span class="pay-mark">Z</span><span>درگاه پرداخت آزمایشی</span></div>
-    <div class="pay-warning">محیط نمایشی — اطلاعات کارت بانکی واقعی وارد نکنید</div>
-    <div class="pay-card">
-      <div class="pay-title">پرداخت اینترنتی</div>
-      <div class="pay-merchant">پذیرنده: فروشگاه سکه (دمو)</div>
-      <div class="pay-amount-label">مبلغ قابل پرداخت</div>
-      <div class="pay-amount" id="payAmount">—</div>
-      <div class="pay-field"><label for="demoCard">شماره کارت آزمایشی</label><input id="demoCard" inputmode="numeric" placeholder="•••• •••• •••• ••••" maxlength="19" autocomplete="off"></div>
-      <div class="pay-row">
-        <div class="pay-field"><label for="demoExpiry">تاریخ انقضا</label><input id="demoExpiry" placeholder="MM/YY" maxlength="5" autocomplete="off"></div>
-        <div class="pay-field"><label for="demoCvv">CVV2</label><input id="demoCvv" inputmode="numeric" placeholder="•••" maxlength="4" autocomplete="off"></div>
-      </div>
-      <button type="button" id="demoPayBtn" class="btn-gold">پرداخت آزمایشی</button>
-      <button type="button" id="cancelPayBtn" class="pay-cancel">بازگشت به فروشگاه</button>
-      <div id="demoPayMessage" class="pay-message">این صفحه شبیه‌سازی است و به شبکه بانکی متصل نیست.</div>
-    </div>
-    <div class="pay-footer">پرداخت امنِ نمایشی · بدون تراکنش واقعی</div>
-  </div>
-</section>
-
 <script>
 /* ---------- تنظیمات ---------- */
 // کاربران مجاز (نسخه نمایشی – برای امنیت واقعی باید احراز هویت سمت سرور باشد)
 const USERS = {
-  "safari": "1234",
+  "admin": "1234",
   "user1": "gold2026"
 };
 const MAX_QTY = 10;
 
 const PRODUCTS = [
-  {id:1, name:"سکه بهار آزادی (تمام)", desc:"طرح امامی · عیار ۹۰۰",   price:259160000, big:"تمام",  small:"بهار آزادی", cls:"",      tag:"پرفروش"},
-  {id:2, name:"نیم سکه",                 desc:"نیم‌سکه بهار آزادی",     price:142970000, big:"نیم",   small:"سکه",       cls:"small", tag:""},
-  {id:3, name:"ربع سکه",                 desc:"ربع‌سکه بهار آزادی",     price:76980000, big:"ربع",   small:"سکه",       cls:"tiny",  tag:"اقتصادی"},
-  {id:4, name:"سکه گرمی",                desc:"یک گرم · طلای ۲۴ عیار",  price:37000000,  big:"۱",     small:"گرم",       cls:"gram",  tag:""},
-  {id:5, name:"سکه تمام امامی",          desc:"ضرب ۱۳۸۶ تا ۱۴۰۴",       price:268790000, big:"امامی", small:"تمام سکه",  cls:"",      tag:"ویژه"},
+  {id:1, name:"سکه بهار آزادی (تمام)", desc:"طرح امامی · عیار ۹۰۰",   price:46500000, big:"تمام",  small:"بهار آزادی", cls:"",      tag:"پرفروش"},
+  {id:2, name:"نیم سکه",                 desc:"نیم‌سکه بهار آزادی",     price:25200000, big:"نیم",   small:"سکه",       cls:"small", tag:""},
+  {id:3, name:"ربع سکه",                 desc:"ربع‌سکه بهار آزادی",     price:14100000, big:"ربع",   small:"سکه",       cls:"tiny",  tag:"اقتصادی"},
+  {id:4, name:"سکه گرمی",                desc:"یک گرم · طلای ۲۴ عیار",  price:6200000,  big:"۱",     small:"گرم",       cls:"gram",  tag:""},
+  {id:5, name:"سکه تمام امامی",          desc:"ضرب ۱۳۸۶ تا ۱۴۰۴",       price:48200000, big:"امامی", small:"تمام سکه",  cls:"",      tag:"ویژه"},
   {id:6, name:"سکه پهلوی",               desc:"سکه کلکسیونی · نمونه",    price:52800000, big:"پهلوی", small:"تمام سکه",  cls:"",      tag:"کلکسیونی"}
 ];
 
@@ -559,6 +717,8 @@ function toast(msg){
 const loginScreen=$('#loginScreen'), shopScreen=$('#shopScreen');
 
 function showShop(user){
+  currentUser=user; ensureSeed(user);
+  reportScreen.classList.add('hidden');
   loginScreen.classList.add('hidden');
   shopScreen.classList.remove('hidden');
   window.scrollTo(0,0);
@@ -567,6 +727,7 @@ function showShop(user){
   startClock();
 }
 function showLogin(){
+  reportScreen.classList.add('hidden');
   shopScreen.classList.add('hidden');
   loginScreen.classList.remove('hidden');
   const c=$('#loginCard'); c.style.animation='none'; void c.offsetWidth; c.style.animation='';
@@ -613,7 +774,10 @@ $('#logoutBtn').addEventListener('click',()=>{
 let clockTimer;
 function tick(){
   const now=new Date();
-  const opts = {weekday:'long',year:'numeric',month:'long',day:'numeric'};
+  const narrow=window.innerWidth<480;
+  const opts = narrow
+    ? {year:'numeric',month:'long',day:'numeric'}
+    : {weekday:'long',year:'numeric',month:'long',day:'numeric'};
   $('#clockDate').textContent=new Intl.DateTimeFormat('fa-IR-u-ca-persian',opts).format(now);
   $('#clockTime').textContent=new Intl.DateTimeFormat('fa-IR',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
 }
@@ -635,7 +799,6 @@ function coinHTML(p,extra=''){
 }
 
 /* ---------- نمایش محصولات ---------- */
-/* قیمت‌های ثابت بازار در تاریخ ۱۷ مهر ۱۴۰۵؛ دریافت زنده غیرفعال است. */
 function renderProducts(){
   const grid=$('#grid'); grid.innerHTML='';
   PRODUCTS.forEach((p,i)=>{
@@ -696,25 +859,157 @@ overlay.addEventListener('click',e=>{ if(e.target===overlay) closeModal(); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
 $('#orderBtn').addEventListener('click',()=>{
-  if(!current) return;
-  const amount = current.price * qty;
-  $('#payAmount').textContent = fa(amount) + ' تومان';
-  $('#demoPayMessage').textContent = 'این صفحه شبیه‌سازی است و به شبکه بانکی متصل نیست.';
-  $('#demoCard').value=''; $('#demoExpiry').value=''; $('#demoCvv').value='';
-  closeModal();
-  shopScreen.classList.add('hidden');
-  $('#paymentScreen').classList.remove('hidden');
-  window.scrollTo(0,0);
+  const btn=$('#orderBtn'); btn.disabled=true; btn.textContent='در حال ثبت...';
+  setTimeout(()=>{
+    btn.disabled=false; btn.textContent='ثبت سفارش';
+    const rec=addOrder(current,qty);
+    $('#sMsg').textContent=`${fa(qty)} عدد «${current.name}» به مبلغ ${fa(current.price*qty)} تومان ثبت شد.`;
+    $('#sCode').textContent='شماره سفارش (سند حسابداری): '+faNum(rec.no);
+    modal.classList.add('done');
+  },900);
 });
 $('#doneBtn').addEventListener('click',closeModal);
-$('#cancelPayBtn').addEventListener('click',()=>{
-  $('#paymentScreen').classList.add('hidden');
+
+/* ======================= گزارش خرید ======================= */
+const reportScreen=$('#reportScreen');
+let currentUser='';
+const REGISTRAR='روشا گلد';
+const STATUS={done:{t:'تکمیل شد',c:'ok'},processing:{t:'در حال پردازش',c:'wait'},cancelled:{t:'لغو شد',c:'bad'},failed:{t:'ناموفق',c:'bad'}};
+const faNum=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+
+/* تاریخ شمسی از روی Intl (بدون کتابخانه) */
+const jFmt=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{year:'numeric',month:'numeric',day:'numeric'});
+function jParts(ts){ const o={}; jFmt.formatToParts(new Date(ts)).forEach(x=>{o[x.type]=x.value}); return {y:+o.year,m:+o.month,d:+o.day}; }
+const jNum=p=>p.y*10000+p.m*100+p.d;
+const dateFa=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'2-digit',day:'2-digit'});
+const timeFa=new Intl.DateTimeFormat('fa-IR',{hour:'2-digit',minute:'2-digit',hour12:false});
+
+/* ذخیره‌سازی (localStorage؛ اگر در دسترس نبود فقط در حافظه) */
+const memOrders={};
+const okey=u=>'goldCoinOrders:'+u;
+function loadOrders(u){
+  try{ const r=localStorage.getItem(okey(u)); if(r) return JSON.parse(r); }catch(_){}
+  return memOrders[u]||null;
+}
+function saveOrders(u,list){
+  memOrders[u]=list;
+  try{ localStorage.setItem(okey(u),JSON.stringify(list)); }catch(_){}
+}
+function nextNo(list){ return list.reduce((m,o)=>Math.max(m,o.no),100200)+1; }
+function addOrder(p,q){
+  const list=loadOrders(currentUser)||[];
+  const rec={no:nextNo(list),type:'خرید',product:p.name,qty:q,unit:p.price,amount:p.price*q,registrar:REGISTRAR,at:Date.now(),status:'done'};
+  list.push(rec); saveOrders(currentUser,list);
+  return rec;
+}
+/* چند سفارش نمونه برای دیدن گزارش و فیلتر (فقط بار اول هر کاربر) */
+function ensureSeed(u){
+  if(loadOrders(u)) return;
+  const now=Date.now(), day=864e5;
+  const rows=[[58,11,20,1,2,'done'],[41,16,5,3,5,'done'],[27,9,42,2,1,'cancelled'],[13,14,30,5,1,'done'],[6,18,10,4,10,'done'],[2,10,15,6,1,'failed'],[0,8,5,2,2,'processing']];
+  const list=rows.map(([ago,h,m,pid,q,st])=>{
+    const p=PRODUCTS.find(x=>x.id===pid); const t=new Date(now-ago*day); t.setHours(h,m,0,0);
+    return {type:'خرید',product:p.name,qty:q,unit:p.price,amount:p.price*q,registrar:REGISTRAR,at:Math.min(t.getTime(),now-5*60000),status:st};
+  }).sort((a,b)=>a.at-b.at);
+  list.forEach((o,i)=>{o.no=100201+i;});
+  saveOrders(u,list);
+}
+
+/* فیلترها */
+const SEL={f:{y:$('#fy'),m:$('#fm'),d:$('#fd')},t:{y:$('#ty'),m:$('#tm'),d:$('#td')}};
+let selectsReady=false;
+function buildSelects(){
+  const cy=jParts(Date.now()).y;
+  for(const k of ['f','t']){
+    const {y,m,d}=SEL[k];
+    y.innerHTML='<option value="">سال</option>'+[cy,cy-1,cy-2].map(v=>`<option value="${v}">${faNum(v)}</option>`).join('');
+    m.innerHTML='<option value="">ماه</option>'+MONTHS.map((n,i)=>`<option value="${i+1}">${n}</option>`).join('');
+    d.innerHTML='<option value="">روز</option>'+Array.from({length:31},(_,i)=>`<option value="${i+1}">${faNum(i+1)}</option>`).join('');
+  }
+  selectsReady=true;
+}
+function setKey(k,p){
+  const s=SEL[k];
+  s.y.value=p?String(p.y):''; s.m.value=p?String(p.m):''; s.d.value=p?String(p.d):'';
+}
+function readKey(k){
+  const s=SEL[k]; const y=s.y.value,m=s.m.value,d=s.d.value;
+  if(!y&&!m&&!d) return {empty:true};
+  if(!y||!m||!d) return {partial:true};
+  return {n:(+y)*10000+(+m)*100+(+d)};
+}
+function setChip(r){
+  document.querySelectorAll('#rpChips .chip').forEach(c=>c.classList.toggle('on',c.dataset.r===r));
+}
+function applyChip(r){
+  const now=Date.now(), today=jParts(now);
+  if(r==='all'){ setKey('f',null); setKey('t',null); }
+  else if(r==='today'){ setKey('f',today); setKey('t',today); }
+  else if(r==='month'){ setKey('f',{y:today.y,m:today.m,d:1}); setKey('t',today); }
+  else { setKey('f',jParts(now-(+r-1)*864e5)); setKey('t',today); }
+  setChip(r); renderReport();
+}
+
+function renderReport(){
+  const all=(loadOrders(currentUser)||[]).slice().sort((a,b)=>b.at-a.at);
+  const f=readKey('f'), t=readKey('t'), st=$('#rpStatus').value;
+  const msg=$('#rpMsg'); msg.textContent='';
+  let rows=all;
+  if(f.partial||t.partial){ msg.textContent='تاریخ را کامل (سال، ماه و روز) انتخاب کنید.'; }
+  else if(f.n&&t.n&&f.n>t.n){ msg.textContent='تاریخ شروع نباید بعد از تاریخ پایان باشد.'; rows=[]; }
+  else{
+    rows=all.filter(o=>{
+      const k=jNum(jParts(o.at));
+      if(f.n&&k<f.n) return false;
+      if(t.n&&k>t.n) return false;
+      if(st==='bad') return o.status==='cancelled'||o.status==='failed';
+      if(st) return o.status===st;
+      return true;
+    });
+  }
+  const body=$('#rpBody');
+  body.innerHTML=rows.map(o=>{
+    const s=STATUS[o.status]||STATUS.processing;
+    return `<tr>
+      <td data-label="نوع"><span class="v"><span class="type-pill">${o.type}</span></span></td>
+      <td data-label="شماره سفارش (سند حسابداری)"><span class="v mono">${faNum(o.no)}</span></td>
+      <td data-label="محصول"><span class="v">${o.product}<small>× ${faNum(o.qty)} عدد</small></span></td>
+      <td data-label="قیمت"><span class="v">${fa(o.amount)}<small>تومان</small></span></td>
+      <td data-label="ثبت‌کننده"><span class="v">${o.registrar}</span></td>
+      <td data-label="تاریخ"><span class="v">${dateFa.format(o.at)}<small>${timeFa.format(o.at)}</small></span></td>
+      <td data-label="وضعیت"><span class="v"><span class="st ${s.c}">${s.t}</span></span></td>
+    </tr>`;
+  }).join('');
+  $('#rpEmpty').classList.toggle('hidden',rows.length>0);
+  $('.rp-table').classList.toggle('hidden',rows.length===0);
+  $('#sumCount').textContent=fa(rows.length);
+  const total=rows.filter(o=>o.status==='done').reduce((s,o)=>s+o.amount,0);
+  $('#sumAmount').innerHTML=fa(total)+'<small>تومان</small>';
+}
+
+function openReport(){
+  if(!selectsReady) buildSelects();
+  $('#dropdown').classList.remove('show'); $('#accountBtn').classList.remove('open');
+  closeModal();
+  shopScreen.classList.add('hidden');
+  reportScreen.classList.remove('hidden');
+  window.scrollTo(0,0);
+  applyChip('all'); $('#rpStatus').value=''; renderReport();
+}
+function closeReport(){
+  reportScreen.classList.add('hidden');
   shopScreen.classList.remove('hidden');
   window.scrollTo(0,0);
-});
-$('#demoPayBtn').addEventListener('click',()=>{
-  $('#demoPayMessage').textContent='پرداخت انجام نشد؛ این فقط یک درگاه نمایشی است و هیچ تراکنش بانکی انجام نمی‌شود.';
-});
+}
+$('#reportBtn').addEventListener('click',openReport);
+$('#rpBack').addEventListener('click',closeReport);
+$('#toReportBtn').addEventListener('click',openReport);
+$('#rpClear').addEventListener('click',()=>{ $('#rpStatus').value=''; applyChip('all'); });
+document.querySelectorAll('#rpChips .chip').forEach(c=>c.addEventListener('click',()=>applyChip(c.dataset.r)));
+for(const k of ['f','t']) for(const e of Object.values(SEL[k])) e.addEventListener('change',()=>{ setChip(''); renderReport(); });
+$('#rpStatus').addEventListener('change',renderReport);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!reportScreen.classList.contains('hidden')) closeReport(); });
 
 /* ---------- ادامه نشست ---------- */
 try{
